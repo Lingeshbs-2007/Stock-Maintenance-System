@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f4f6f8">
+    <title>Stock Maintenance System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" aria-label="Main navigation">
+            <a class="brand" href="#" id="brandHome" aria-label="Stockroom home">
+                <span class="brand-mark" aria-hidden="true">S</span>
+                <span class="brand-copy"><strong>Stockroom</strong><small>Inventory manager</small></span>
+            </a>
+
+            <div class="nav-label">WORKSPACE</div>
+            <nav>
+                <button id="homeBtn" class="nav-button active" type="button"><span class="nav-icon" aria-hidden="true">⌂</span>Dashboard</button>
+                <button id="addBtn" class="nav-button" type="button"><span class="nav-icon" aria-hidden="true">＋</span>Add Product</button>
+                <button id="viewBtn" class="nav-button" type="button"><span class="nav-icon" aria-hidden="true">▤</span>View Products</button>
+            </nav>
+
+            <div class="sidebar-note"><span class="status-dot"></span><span>Inventory workspace<br><small>Manage your stock in one place</small></span></div>
+            <div class="sidebar-footer">STOCK MAINTENANCE SYSTEM</div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div><span class="topbar-eyebrow">INVENTORY MANAGEMENT</span><h1>Stock Maintenance System</h1></div>
+                <span class="topbar-date">Inventory overview</span>
+            </header>
+
+            <section id="dashboardSection" class="page-section">
+                <div class="page-heading"><div><p class="eyebrow">OVERVIEW</p><h2>Dashboard</h2><p class="subtitle">A clear view of your current inventory.</p></div></div>
+                <div class="dashboard">
+                    <div class="card metric-card metric-blue"><div class="metric-top"><span class="metric-icon" aria-hidden="true">▦</span><span class="metric-label">Total Products</span></div><p id="totalProducts">0</p><small>Products in your inventory</small></div>
+                    <div class="card metric-card metric-violet"><div class="metric-top"><span class="metric-icon" aria-hidden="true">▤</span><span class="metric-label">Total Quantity</span></div><p id="totalQuantity">0</p><small>Units across all products</small></div>
+                    <div class="card metric-card metric-green"><div class="metric-top"><span class="metric-icon" aria-hidden="true">✓</span><span class="metric-label">In Stock</span></div><p id="inStock">0</p><small>Products at healthy levels</small></div>
+                    <div class="card metric-card metric-amber"><div class="metric-top"><span class="metric-icon" aria-hidden="true">!</span><span class="metric-label">Low Stock</span></div><p id="lowStock">0</p><small>Products to keep an eye on</small></div>
+                    <div class="card metric-card metric-red"><div class="metric-top"><span class="metric-icon" aria-hidden="true">×</span><span class="metric-label">Out of Stock</span></div><p id="outStock">0</p><small>Products currently unavailable</small></div>
+                </div>
+                <div class="dashboard-footnote"><span class="status-dot"></span>Statistics update automatically as your inventory changes.</div>
+            </section>
+
+            <section id="addProductSection" class="page-section hidden">
+                <div class="page-heading"><div><p class="eyebrow">INVENTORY</p><h2>Add Product</h2><p class="subtitle">Enter product details to add an item to your inventory.</p></div></div>
+                <div class="form-card"><div class="card-heading"><span class="card-heading-icon" aria-hidden="true">＋</span><div><h3>Product details</h3><p>Complete each field below.</p></div></div>
+                    <form id="productForm">
+                        <div class="form-grid">
+                            <div class="form-group"><label for="productName">Product Name</label><input type="text" id="productName" placeholder="e.g. Wireless keyboard"></div>
+                            <div class="form-group"><label for="category">Category</label><select id="category"><option value="">Select category</option><option>Electronics</option><option>Grocery</option><option>Stationery</option><option>Furniture</option><option>Hardware</option><option>Others</option></select></div>
+                            <div class="form-group"><label for="supplier">Supplier Name</label><input type="text" id="supplier" placeholder="Enter supplier name"></div>
+                            <div class="form-group"><label for="quantity">Quantity</label><input type="number" id="quantity" placeholder="Enter quantity"></div>
+                            <div class="form-group"><label for="price">Unit Price (₹)</label><input type="number" id="price" placeholder="Enter unit price"></div>
+                        </div>
+                        <div class="form-actions"><span class="form-hint">Fields are required to save a product.</span><button type="submit" id="saveBtn" class="primary-button">Save Product</button></div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="viewProductSection" class="page-section hidden">
+                <div class="page-heading"><div><p class="eyebrow">INVENTORY</p><h2>View Products</h2><p class="subtitle">Search, organize, and manage your products.</p></div></div>
+                <div class="products-panel">
+                    <div class="panel-toolbar"><div class="toolbar-title"><h3>All products</h3><p>Filter the inventory or choose a sort order.</p></div>
+                        <div class="controls">
+                            <label class="search-wrap"><span aria-hidden="true">⌕</span><input type="text" id="searchInput" placeholder="Search products, categories or suppliers" aria-label="Search products, categories or suppliers"></label>
+                            <select id="filterStatus" aria-label="Filter by stock status"><option value="all">All Products</option><option value="In Stock">In Stock</option><option value="Low Stock">Low Stock</option><option value="Out of Stock">Out of Stock</option></select>
+                            <select id="sortProducts" aria-label="Sort products"><option value="">Sort By</option><option value="nameAsc">Product Name A-Z</option><option value="nameDesc">Product Name Z-A</option><option value="qtyAsc">Quantity Low-High</option><option value="qtyDesc">Quantity High-Low</option><option value="priceAsc">Price Low-High</option><option value="priceDesc">Price High-Low</option></select>
+                        </div>
+                    </div>
+                    <div class="table-container"><table><thead><tr><th>ID</th><th>Product</th><th>Category</th><th>Supplier</th><th>Quantity</th><th>Price</th><th>Status</th><th>Date Added</th><th>Actions</th></tr></thead><tbody id="productTable"><!-- JavaScript will insert rows --></tbody></table></div>
+                </div>
+            </section>
+
+            <footer><span>© 2026 Stock Maintenance System</span><span>Inventory management workspace</span></footer>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
